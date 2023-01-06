@@ -1,0 +1,73 @@
+.search-page {
+  width: 92%;
+  margin: auto;
+  display: flex;
+  padding: 18px 0 68px 0;
+  align-items: flex-end;
+  justify-content: space-between;
+  .search-image-wrap {
+    width: 77%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .search-logo {
+      width: 9%;
+      margin-left: 2%;
+      .search-image {
+        // margin-left: 15%;
+      }
+    }
+    .search-content {
+      width: 85%;
+      display: flex;
+      border-bottom: 2px solid #1b1b1b;
+      align-items: center;
+      justify-content: space-between;
+      margin-right: 4%;
+      .input-wrap {
+        width: 80%;
+        .search-input {
+          width: 100%;
+          font-size: 26px;
+          border: none;
+          padding: 4px 0;
+          outline: none;
+          padding-bottom: 11px;
+        }
+        ::placeholder {
+          font-size: 26px;
+          font-weight: 400;
+        }
+      }
+      .content-title {
+        width: 20%;
+        display: flex;
+        column-gap: 14px;
+        .search-author {
+          font-size: 13px;
+          font-weight: 700;
+        }
+        .setting-search {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+
+  .search-match {
+    width: 23%;
+    .match-input {
+      width: 100%;
+      .ant-select-selector {
+        border: none;
+        border-bottom: 2px solid #1b1b1b;
+        outline: none;
+      }
+      .ant-select-arrow {
+        padding-bottom: 5%;
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+.header-page{
+    width: 92%;
+    margin:auto;
+    display: flex;
+    justify-content: space-between;
+    .header-menu {
+        display: flex;
+        column-gap: 42px;
+        align-items: center;
+        .header-image{
+            width: 100%;
+        }
+        .header-navbar{
+            .nav-list{
+                display: flex;
+                column-gap: 53px;
+                .nav-item{
+                    font-size: 13px;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+    .header-cart{
+        display: flex;
+        align-items: center;
+        column-gap: 56px;
+        .cart-image{
+            width: 19px;
+            height: 18px;
+        }
+        .header-button-menu{
+            display:none;
+        }
+        .header-modal{
+            display: none;
+        }
+        .header-modal-close{
+            display: none;
+        }
+    }
+}
+
+// @media screen and (max-width:340px) {
+//    header{
+//     max-width: 328px;
+//     width: 100%;
+//     margin:0;
+//    }
+// }

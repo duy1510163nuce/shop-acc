@@ -1,0 +1,22 @@
+.footer {
+  width: 92%;
+  margin: auto;
+  .ant-pagination {
+    padding: 4% 0;
+  }
+  .ant-pagination-item-active {
+    background-color: black !important;
+  }
+  .ant-pagination-item-active a {
+    color: #fff !important;
+  }
+  .ant-select-selector {
+    display: none;
+  }
+  .ant-pagination-options{
+    display: none;
+  }
+  .footer-mobile{
+    display: none;
+  }
+}
