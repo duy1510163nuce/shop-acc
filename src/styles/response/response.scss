@@ -29,7 +29,7 @@
         .header-modal {
           display: block;
           position: absolute;
-          background-color: #000;
+          background-color: #1B1B1B;
           z-index: 1;
           top: 0;
           left: 0;
@@ -44,7 +44,7 @@
             }
             .modal-navigation {
               .image-cart-white {
-                margin-right: 47px;
+                margin-right: 30px;
               }
               .anticon {
                 font-size: 27px;
@@ -54,7 +54,7 @@
               .header-button-close {
                 font-size: 16px;
                 border: none;
-                background-color: #000;
+                background-color: #1B1B1B;
               }
             }
           }
@@ -101,6 +101,7 @@
             .search-input {
               border: none;
               border-bottom: 2px solid #1b1b1b;
+              font-size: 18px;
             }
             ::placeholder {
               font-size: 18px;

@@ -1,107 +1,115 @@
 import { FC, ReactElement, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Content, { TProduct } from "components/modules/Content";
 import Header from "components/modules/Header";
 import Search from "components/modules/Search";
 import { getData } from "services/handleData";
 import Footer from "components/modules/Footer";
 import "styles/response/response.scss";
+import { getListProduct } from "redux/infoProductSlice";
+import { addDataCart } from "redux/DataCartSlice";
+import { count } from "console";
 
-// enum ValueFilterState {
-//     collectionFilter,
-//     categoryFilter,
-//     colorFilter,
-//     priceFilter,
-// }
+type TValueOnchange = {
+  collection: number | undefined;
+  category: string | undefined;
+  color: string | undefined;
+  price: number | undefined;
+};
+
 const HomePage: FC = (): ReactElement => {
+  const [totalProductsCart, setTotalProductsCart] = useState(0);
+  const [productCart, setProductCart] = useState<TProduct[]>([]);
   const [listProduct, setListProduct] = useState<TProduct[]>([]);
-  const [listDataFilter, setListDataFilter] = useState<TProduct[]>([])
-  const [nameFilter, setNameFilter] = useState("");
+  const [listDataFilter, setListDataFilter] = useState<TProduct[]>([]);
+  const [nameFilter, setNameFilter] = useState();
   const [valueOnchange, setValueOnchange] = useState({
     collection: 0,
     category: "",
     color: "",
     price: 0,
   });
+  const dispatch = useDispatch<any>();
+  const listInfoProduct = useSelector((store: any) => store.listInfoProduct);
+  const listProductCart = useSelector((store: any) => store.dataCartSlice);
   useEffect(() => {
-    const path = "/listProduct";
-    const getListProduct = async () => {
-      const listData = await getData(path);
-      setListProduct(listData);
-      setListDataFilter(listData);
-    };
-    getListProduct();
+    dispatch(getListProduct());
   }, []);
 
-  const onChangeValueSearch = (e: any) => {
-    setNameFilter(e.target.value);
-  };
   const onChangeValue = (value: any, type: string) => {
-    console.log(value);
-    if (type === 'rage') {
-    setListDataFilter(listProduct.filter((item) => item.collection === value))
-  
-    }
-    if(type === 'color'){
-      setListDataFilter(listProduct.filter((item) => item.color.toLowerCase() === value.toLowerCase()))
-    }
-    if(type === 'category'){
-      setListDataFilter(listProduct.filter((item) => item.category.toLowerCase().includes(value.toLowerCase()) ))
-    }
-    if(type === 'price'){
-      setListDataFilter(listProduct.filter((item) => item.price ===    value))
-    }
-
-
-
-
-    // switch (index) {
-    //   case 1:
-    //     setValueOnchange({ ...valueOnchange, collection: value });
-    //     break;
-    //   case 2:
-    //     setValueOnchange({ ...valueOnchange, category: value });
-    //     break;
-    //   case 3:
-    //     setValueOnchange({ ...valueOnchange, color: value });
-    //     break;
-    //   case 4:
-    //     setValueOnchange({ ...valueOnchange, price: value });
-    //     break;
-
-    //   default:
-    //     break;
+    // // if(type === 'rage'){
+    //   setListDataFilter(listData.filter((item)=>item.collection === value));
     // }
+    // if(type === 'color'){
+    //   //   setListDataFilter(listData.filter((item)=>item.color.toLowerCase() === value.toLowerCase()));
+    // }
+    // if(type === 'category'){
+    //   //   setListDataFilter(listData.filter((item)=>item.category.toLowerCase() === value.toLowerCase()));
+    // }
+
+    switch (type) {
+      case "rage":
+        setValueOnchange({ ...valueOnchange, collection: value });
+        break;
+      case "category":
+        setValueOnchange({ ...valueOnchange, category: value });
+        break;
+      case "color":
+        setValueOnchange({ ...valueOnchange, color: value });
+        break;
+      case "price":
+        setValueOnchange({ ...valueOnchange, price: value });
+        break;
+
+      default:
+        break;
+    }
   };
-  // useEffect(() => {
-  //   setListDataFilter(
-  //     listProduct.filter((item: any) => {
-  //       return item.name?.toLowerCase().includes(nameFilter?.toLowerCase());
-  //     })
-  //   );
-  // }, [nameFilter, listProduct]);
 
-  // useEffect(() => {
-  //   setListDataFilter(
-  //     listProduct.filter((item: any) => {
-  //       return (
-  //         (item?.color.toLowerCase().includes(valueOnchange?.color.toLowerCase())
-  //         && item?.collection === valueOnchange.collection) 
-  //         // && item?.category
-  //         // && item.name?.toLowerCase().includes(nameFilter?.toLowerCase())
-  //         //  && item.price > valueOnchange.price
-  //       );
-  //     })
-  //   );
-  // }, [valueOnchange]);
+  useEffect(() => {
+    const { collection, category, color, price } = valueOnchange;
+    setListDataFilter(
+      listProduct.filter((item) => {
+        return (
+          // !collection || collection === 0
+          collection &&
+          // ? true
+          // :
+          item.collection === collection &&
+          (!category || category === ""
+            ? true
+            : item.category.toLowerCase().includes(category.toLowerCase())) &&
+          (!color || color === ""
+            ? true
+            : item.color.toLowerCase() === color.toLowerCase()) &&
+          (!price || price === 0 ? true : item.price > price) &&
+          (nameFilter === "" || !nameFilter
+            ? true
+            : item.name.toLowerCase().includes(nameFilter))
+        );
+      })
+    );
+  }, [valueOnchange, nameFilter]);
 
-  console.log(listDataFilter);
+  const handleAddCart = (product: any) => {
+    setTotalProductsCart((pre) => pre + 1);
+    dispatch(
+      addDataCart(
+        // listInfoProduct?.find((item: TProduct) => item.id === product.id)
+        product
+      )
+    );
+  };
+
   return (
     <div className="home-page">
-      <Header />
-      <Search
-        onChangeValueSearch={onChangeValueSearch}
+      <Header totalProductsCart={totalProductsCart} />
+      <Search setNameFilter={setNameFilter} />
+      <Content
+        listDataFilter={listInfoProduct}
+        handleAddCart={handleAddCart}
+        onChangeValue={onChangeValue}
       />
-      <Content listDataFilter={listDataFilter} onChangeValue={onChangeValue} />
       <Footer />
     </div>
   );

@@ -49,6 +49,12 @@
             color: #000;
           }
         }
+        .product-cart{
+          cursor: pointer;
+          &:hover {
+              opacity: 0.5;
+          }
+        }
       }
     }
   }

@@ -5,14 +5,17 @@
 export const navbarMenu = [
     {
         id:1,
-        name: 'Home'
+        name: 'Home',
+        // isActive:true,
     },
      {
         id:2,
-        name: 'Shop'
+        name: 'Shop',
+        // isActive:false,
     },
      {
         id:3,
-        name: 'Magazine'
+        name: 'Magazine',
+        // isActive:false,
     },
 ]

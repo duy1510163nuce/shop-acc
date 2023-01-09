@@ -3,8 +3,19 @@ import { FC, ReactElement, useState } from "react";
 import "styles/modules/header.scss";
 import { Button, Modal } from "antd";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
-const Header: FC = (): ReactElement => {
+import { Link,useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+
+
+type HeaderProps = {
+  totalProductsCart:number
+};
+
+const Header: FC<HeaderProps> = ({totalProductsCart}): ReactElement => {
   const [isModalOpen, setOpen] = useState(false);
+  const [idActive, setIdActive] = useState(1);
+  let navigate = useNavigate()
+  // const [totalProductsCart, setTotalProductsCart] = useState(1);
 
   return (
     <div className="header-page">
@@ -14,16 +25,24 @@ const Header: FC = (): ReactElement => {
           <ul className="nav-list">
             {navbarMenu.map((item, index) => {
               return (
-                <li className="nav-item" key={index}>
+                <Link
+                  to={`/${item.name}`}
+                  className={
+                    idActive === index + 1 ? "nav-item active" : "nav-item"
+                  }
+                  onClick={() => setIdActive(item.id)}
+                  key={index}
+                >
                   {item.name}
-                </li>
+                </Link>
               );
             })}
           </ul>
         </div>
       </div>
       <div className="header-cart">
-        <img src="images/cart.png" alt="header-cart" className="cart-image" />
+        <img src="images/cart.png" alt="header-cart" className="cart-image" onClick={()=>{navigate("/cart")}} />
+        <div className={totalProductsCart>0 ? "cart-total" : "cart-none" }>{totalProductsCart}</div>
         <p className="header-login">Login</p>
         <Button className="header-button-menu" onClick={() => setOpen(true)}>
           <MenuOutlined />
@@ -47,13 +66,12 @@ const Header: FC = (): ReactElement => {
               >
                 <CloseOutlined />
               </Button>
-              
             </div>
           </div>
           <div className="modal-item">
-                <p className="modal-name-item">Home</p>
-                <p className="modal-name-item">Shop</p>
-                <p className="modal-name-item">Magazine</p>
+            <p className="modal-name-item">Home</p>
+            <p className="modal-name-item">Shop</p>
+            <p className="modal-name-item">Magazine</p>
           </div>
         </div>
       </div>

@@ -9,49 +9,48 @@ import "styles/modules/search.scss";
 // };
 
 type SearchProps = {
-  onChangeValueSearch:Function;
-  // onChangeValue:Function;
+  setNameFilter: Function;
 };
 
-const Search: FC<SearchProps> = ({onChangeValueSearch}): ReactElement => {
+const Search: FC<SearchProps> = ({ setNameFilter }): ReactElement => {
   return (
     <div className="search-page">
       <div className="search-image-wrap">
-          <div className="search-logo">
-            <img
-              src="images/search.png"
-              alt="Search-logo"
-              className="search-image"
-            />
-          </div>
-          <div className="search-content">
-            <div className="input-wrap">
-              <input
-                onChange={(e)=>onChangeValueSearch(e)}
-                type="text"
-                placeholder="living-room"
-                className="search-input"
-              />
-            </div>
-
-            <div className="content-title">
-              <p className="search-author">Powered by Sajari.com </p>
-              <img
-                src="images/setting.png"
-                alt="search-setting"
-                className="setting-search"
-              />
-            </div>
-          </div>
-      </div>
-
-        <div className="search-match">
-          <Select
-            placeholder="Best match"
-            className="match-input"
-            options={optionSelectBestMatch}
+        <div className="search-logo">
+          <img
+            src="images/search.png"
+            alt="Search-logo"
+            className="search-image"
           />
         </div>
+        <div className="search-content">
+          <div className="input-wrap">
+            <input
+              onChange={(e) => setNameFilter(e.target.value)}
+              type="text"
+              placeholder="living-room"
+              className="search-input"
+            />
+          </div>
+
+          <div className="content-title">
+            <p className="search-author">Powered by Sajari.com </p>
+            <img
+              src="images/setting.png"
+              alt="search-setting"
+              className="setting-search"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="search-match">
+        <Select
+          placeholder="Best match"
+          className="match-input"
+          options={optionSelectBestMatch}
+        />
+      </div>
     </div>
   );
 };

@@ -19,6 +19,10 @@ export const optionSelectCollection = [
     value: 5,
     label: "5 sao",
   },
+  {
+    value:0,
+    label: "all"
+  }
 ];
 export const optionSelectColor = [
   {
@@ -33,6 +37,10 @@ export const optionSelectColor = [
     value: "Orange",
     label: "Orange",
   },
+   {
+    value:"",
+    label: "all"
+  }
 ];
 export const optionSelectCategory = [
   {
@@ -51,4 +59,9 @@ export const optionSelectCategory = [
     value: "Chair",
     label: "Chair",
   },
+   {
+    value:"",
+    label: "all"
+  }
+  
 ];

@@ -1,14 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import HomePage from 'pages/HomePage';
+import { RouterProvider } from "react-router-dom";
+
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
+import { router } from 'routers/router';
+import { Provider } from 'react-redux';
+import store from 'redux/store';
+// import { router } from 'routers/router';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   // <React.StrictMode>
-    <HomePage />
+  <Provider store={store}>
+
+    <RouterProvider  router={router}/>
+  </Provider>
   // </React.StrictMode>
 );
 

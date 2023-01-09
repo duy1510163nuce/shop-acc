@@ -1,44 +1,70 @@
-.header-page{
-    width: 92%;
-    margin:auto;
+.header-page {
+  width: 92%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  .header-menu {
     display: flex;
-    justify-content: space-between;
-    .header-menu {
-        display: flex;
-        column-gap: 42px;
-        align-items: center;
-        .header-image{
-            width: 100%;
-        }
-        .header-navbar{
-            .nav-list{
-                display: flex;
-                column-gap: 53px;
-                .nav-item{
-                    font-size: 13px;
-                    font-weight: 400;
-                }
-            }
-        }
+    column-gap: 42px;
+    align-items: center;
+    .header-image {
+      width: 100%;
     }
-    .header-cart{
+    .header-navbar {
+      .nav-list {
         display: flex;
-        align-items: center;
-        column-gap: 56px;
-        .cart-image{
-            width: 19px;
-            height: 18px;
+        column-gap: 53px;
+        .nav-item {
+          font-size: 13px;
+          font-weight: 400;
         }
-        .header-button-menu{
-            display:none;
+        .active {
+          color: #f9995d;
         }
-        .header-modal{
-            display: none;
-        }
-        .header-modal-close{
-            display: none;
-        }
+      }
     }
+  }
+  .header-cart {
+    display: flex;
+    align-items: center;
+    column-gap: 56px;
+    position: relative;
+    .cart-image {
+      width: 19px;
+      height: 18px;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.5;
+      }cursor: pointer;
+          &:hover {
+              opacity: 0.5;
+          }
+    }
+    .cart-total {
+      border-radius: 50%;
+      background-color: red;
+      position: absolute;
+      color: #fff;
+      top: 11px;
+      right: 81px;
+      height: 25px;
+      padding: 5px;
+      text-align: center;
+      width: max-content;
+    }
+    .cart-none {
+      display: none;
+    }
+    .header-button-menu {
+      display: none;
+    }
+    .header-modal {
+      display: none;
+    }
+    .header-modal-close {
+      display: none;
+    }
+  }
 }
 
 // @media screen and (max-width:340px) {

@@ -1,40 +1,41 @@
 // import { listProduct } from "const/listProduct";
 import { FC, ReactElement, useState } from "react";
+import "styles/modules/content.scss";
 import Filter from "./Filter";
 import { Rate } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import "styles/modules/content.scss";
+import { Link } from "react-router-dom";
 export type TProduct = {
   id: string;
   image: string;
   name: string;
   category: string;
   collection: number;
-  price: string;
+  price: number;
   cart: string;
   color: string;
+  quantity: number;
 };
 
 type ContentProps = {
   listDataFilter?: TProduct[];
-  onChangeValue:Function;
+  onChangeValue: Function;
+  handleAddCart: Function;
 };
 
-const Content: FC<ContentProps> = ({ 
+const Content: FC<ContentProps> = ({
   listDataFilter,
   onChangeValue,
- }): ReactElement => {
+  handleAddCart,
+}): ReactElement => {
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
   return (
     <div className="content-page">
       <div className="mobile-wrap-filter">
         <h1 className="wrap-name">Filters</h1>
-        <DownOutlined onClick={() =>setIsOpenFilter(!isOpenFilter)} />
+        <DownOutlined onClick={() => setIsOpenFilter(!isOpenFilter)} />
       </div>
-      <Filter 
-        isOpenFilter={isOpenFilter} 
-        onChangeValue={onChangeValue}
-      />
+      <Filter isOpenFilter={isOpenFilter} onChangeValue={onChangeValue} />
       {listDataFilter?.map((product, index) => {
         return (
           <div className="content-product" key={product.id}>
@@ -51,12 +52,13 @@ const Content: FC<ContentProps> = ({
               <p className="product-price">${product.price}</p>
               <div className="product-bought">
                 <div className="product-collection">
-                  <Rate defaultValue={product.collection}  />
+                  <Rate defaultValue={product.collection} />
                 </div>
                 <img
                   className="product-cart"
                   alt="product-cart"
                   src={product.cart}
+                  onClick={() => handleAddCart(product)}
                 />
               </div>
             </div>
